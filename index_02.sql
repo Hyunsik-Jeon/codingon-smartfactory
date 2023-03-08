@@ -2,6 +2,9 @@
 
 -- smartfactory 데이터베이스 사용
 USE smartfactory;
+desc customer;
+INSERT INTO user VALUES ('hong', '안녕하세요', '홍길동', '010-1234-1234', '1990-01-31');
+
 
 -- < SELECT/FROM >
 
@@ -151,3 +154,67 @@ SELECT * FROM customer WHERE birth >= '2000-01-01' LIMIT 2;
 -- 2000년 이후 출생 고객 중에서 뒤에 2건만 조회하고 싶은 경우
 SELECT * FROM customer WHERE birth >= '2000-01-01' ORDER BY custid DESC LIMIT 2;
 SELECT * FROM customer LIMIT 1, 2;
+
+
+-- < IS NULL >
+-- 고객 테이블에서 연락처가 존재하지 않는 고객 조회
+SELECT * FROM customer WHERE phone IS NULL;
+SELECT * FROM customer WHERE birth IS NULL;
+SELECT * FROM customer WHERE phone IS NULL AND birth IS NULL;
+
+-- 고객 테이블에서 연락처가 존재하는 고객 조회
+SELECT * FROM customer WHERE phone IS NOT NULL;
+
+
+-- < 집계 함수 >
+-- SUM, AVG, MIN, MAX, COUNT
+SELECT * FROM orders;
+
+-- 주문 테이블에서 총 판매 개수 검색
+SELECT SUM(amount) FROM orders;
+
+-- 주문 테이블에서 총 판매 개수 검색 + 의미 있는 열 이름으로 변경 
+SELECT SUM(amount) AS 'total_amount' FROM orders;
+SELECT SUM(amount) AS total_amount FROM orders; -- 동일한 표현
+SELECT SUM(amount) '총 판매 개수' FROM orders; -- 동일한 표현
+
+-- 주문 테이블에서 총 판매 개수, 평균 판매 개수, 상품 최저가, 상품 최고가 검색
+-- 총 판매 개수: SUM()
+-- 평균 판매 개수: AVG()
+-- 상품 최저가: MIN()
+-- 상품 최고가: MAX()
+SELECT SUM(amount) AS 'total_amount',
+	AVG(amount) AS 'avg_amount', 
+    MIN(price) AS 'min_price', 
+    MAX(price) AS 'max_price'
+FROM orders;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- 주문 테이블에서 총 주문 내역 건수 조회 (== 투플 개수)
+-- COUNT(*): 모든 행의 개수를 카운트
+-- COUNT(속성이름): 속성 값이 NULL인 것을 제외하고 카운트
+SELECT COUNT(*) AS 'number_orders' FROM orders; 
+SELECT COUNT(orderid) FROM orders; 
+
+SELECT COUNT(*) FROM customer; -- 11
+SELECT COUNT(custname) FROM customer; -- 11
+SELECT COUNT(phone) FROM customer; -- 10
+SELECT COUNT(birth) FROM customer; -- 9
