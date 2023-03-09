@@ -189,25 +189,6 @@ SELECT SUM(amount) AS 'total_amount',
     MAX(price) AS 'max_price'
 FROM orders;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- 주문 테이블에서 총 주문 내역 건수 조회 (== 투플 개수)
 -- COUNT(*): 모든 행의 개수를 카운트
 -- COUNT(속성이름): 속성 값이 NULL인 것을 제외하고 카운트
