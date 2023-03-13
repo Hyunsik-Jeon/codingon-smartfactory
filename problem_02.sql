@@ -8,3 +8,4 @@ create table new_user(
 );
 
 desc new_user;
+ALTER TABLE new_user MODIFY gender char(1);
