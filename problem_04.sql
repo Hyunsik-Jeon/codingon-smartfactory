@@ -57,12 +57,14 @@ INSERT INTO departments VALUES
 select * from employees where department_id = 5;
 
 select department_id, count(*) from employees group by department_id;
+select department_name, count(*) as 'num_employees' from departments as d join employees as e on d.department_id = e.department_id group by d.department_name;
 
 select first_name, last_name from employees where salary >=80000;
 
-select first_name, last_name, salary from employees where salary >=80000 and department_id = 3;
+select first_name, last_name, salary from employees where salary >=50000 and department_id = 2;
 
 select job_id, avg(salary) from employees group by job_id;
+select job_title, avg(salary) from jobs as j join employees as e on j.job_id = e.job_id group by job_title;
 
 select job_id, max(salary) from employees group by job_id;
 
@@ -70,7 +72,7 @@ select first_name, last_name, salary from employees order by salary desc limit 1
 
 select first_name, last_name, salary from employees order by salary asc limit 5;
 
-select first_name, last_name from employees where job_id = 1;
+SELECT first_name, last_name FROM employees JOIN employees ON employee_id = job_id;
 
 select first_name, last_name from employees where hire_date between '2021-01-01' and '2021-12-31';
 
